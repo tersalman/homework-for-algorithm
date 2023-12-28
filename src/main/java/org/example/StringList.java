@@ -77,5 +77,6 @@ public interface StringList {
     // из строк в списке
     // и вернуть его.
     String[] toArray();
+
 }
 
