@@ -27,9 +27,9 @@ public class IntegerListIm implements IntegerList {
         }
     }
 
-    private void validateSize() {
+    private void growIfNeeded() {
         if (size == arr.length) {
-            throw new ArrIsFullException();
+            grow();
         }
     }
 
@@ -42,7 +42,7 @@ public class IntegerListIm implements IntegerList {
 
     @Override
     public Integer add(Integer item) {
-        validateSize();
+        growIfNeeded();
         validateItem(item);
 
        arr[size++] = item;
@@ -51,7 +51,7 @@ public class IntegerListIm implements IntegerList {
 
     @Override
     public Integer add(int index, Integer item) {
-        validateSize();
+        growIfNeeded();
         validateItem(item);
         validateIndex(index);
 
@@ -168,15 +168,7 @@ public class IntegerListIm implements IntegerList {
     }
 
     public void sort(Integer[] arr) {
-        for (int i = 0; i < arr.length - 1; i++) {
-            for (int j = 0; j < arr.length - 1 - i; j++) {
-                if (arr[j] > arr[j + 1]) {
-                    int tmp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = tmp;
-                }
-            }
-        }
+        quickSort(arr, 0,size-1);
     }
 
     private boolean binarySearching(Integer[] arr ,Integer item) {
@@ -199,6 +191,50 @@ public class IntegerListIm implements IntegerList {
         return false;
     }
 
+
+    private void grow() {
+        arr = Arrays.copyOf(arr, size + size / 2);
+    }
+
+    public  void quickSort(Integer[] arr, int begin, int end) {
+        if (begin < end) {
+            int partitionIndex = partition(arr, begin, end);
+
+            quickSort(arr, begin, partitionIndex - 1);
+            quickSort(arr, partitionIndex + 1, end);
+        }
+    }
+
+    private  int partition(Integer[] arr, int begin, int end) {
+        int pivot = arr[end];
+        int i = (begin - 1);
+
+        for (int j = begin; j < end; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+
+                swapElements(arr, i, j);
+            }
+        }
+
+        swapElements(arr, i + 1, end);
+        return i + 1;
+    }
+
+    private void swapElements(Integer[] arr, int indexA, int indexB) {
+        int tmp = arr[indexA];
+        arr[indexA] = arr[indexB];
+        arr[indexB] = tmp;
+    }
+
+
+
+
+
+
+
+
+/*
     private static void swapElements(int[] arr, int indexA, int indexB) {
         int tmp = arr[indexA];
         arr[indexA] = arr[indexB];
@@ -242,6 +278,6 @@ public class IntegerListIm implements IntegerList {
 
 
 
-
+*/
 
 }
