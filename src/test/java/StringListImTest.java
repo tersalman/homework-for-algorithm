@@ -1,5 +1,6 @@
-import org.example.StringList;
-import org.example.StringListIm;
+import org.example.IntegerList;
+import org.example.IntegerListIm;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,17 +9,17 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StringListImTest {
-    private final StringListIm out = new StringListIm();
+    private final IntegerListIm out = new IntegerListIm();
 
 
 
     @Test
     public void shouldAddItemCorrectly() {
-        String exp = "hi";
+        Integer exp = 1;
 
-        out.add("hi");
+        out.add(1);
 
-        String actual = out.arr[0];
+        Integer actual = out.arr[0];
 
         assertEquals(exp,actual);
 
@@ -28,8 +29,8 @@ public class StringListImTest {
     @Test
     public void shouldAddItemWithIndex() {
 
-        String expected = "two";
-        assertEquals(expected, out.add(9, "two"));
+        Integer expected = 2;
+        assertEquals(expected, out.add(9, 2));
     }
     @Test
     public void shouldSet(int index, String item) {
@@ -54,7 +55,7 @@ public class StringListImTest {
     public void shouldGet(int index) {
     }
     @Test
-    public void shouldReturnBooleanResultOfEqualsWithArrays(StringList otherList) {
+    public void shouldReturnBooleanResultOfEqualsWithArrays(IntegerList otherList) {
     }
     @Test
     public void shouldReturnSize() {
